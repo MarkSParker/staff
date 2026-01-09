@@ -68,7 +68,7 @@ while (!exit)
                 {
                     // Add one department
                     var department = new Department();
-                    department.Name = getans("Enter new department name");
+                    department.Name = GetAnswer<string>("Enter new department name");
 
                     db.Add(department);
                     db.SaveChanges();
@@ -81,10 +81,10 @@ while (!exit)
                 {
                     //  Add one employee
                     var employee = new Employee();
-                    employee.Name = getans("Name of employee");
-                    employee.Salary = float.Parse(getans("Salary"));
+                    employee.Name = GetAnswer<string>("Name of employee");
+                    employee.Salary = GetAnswer<float>("Salary");
 
-                    var deptName = getans("Department");
+                    var deptName = GetAnswer<string>("Department");
                     employee.DepartmentId = db.Departments.Single(d => d.Name == deptName).Id;
 
                     db.Add(employee);
@@ -130,9 +130,9 @@ while (!exit)
             case "5":
                 {
                     //  Delete an employee
-                    var employeeId = getans("Employee ID");
+                    var employeeId = GetAnswer<int>("Employee ID");
 
-                    var employeeToDelete = db.Employees.Single(x => x.Id == int.Parse(employeeId));
+                    var employeeToDelete = db.Employees.Single(x => x.Id == employeeId);
                     db.Employees.Remove(employeeToDelete);
                     db.SaveChanges();
 
@@ -298,15 +298,18 @@ while (!exit)
     }
 }
 
-static string getans(string prompt)
+//
+//  Solicit a string and convert to the required type
+//
+static T GetAnswer<T>(string prompt)
 {
-    var answer = string.Empty;
+    string answer = "";
 
-    while (string.IsNullOrEmpty(answer))
+    while (string.IsNullOrWhiteSpace(answer))
     {
         Console.Write(prompt + ": ");
         answer = Console.ReadLine().Trim();
     }
 
-    return answer;
+    return (T)Convert.ChangeType(answer, typeof(T));
 }
