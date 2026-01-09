@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Staff.Database
+﻿namespace Staff.Database
 {
     internal class Employee
     {
