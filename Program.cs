@@ -33,13 +33,9 @@ while (!exit)
     Console.WriteLine("");
 
     // Get the command
-    var command = string.Empty;
-    while (string.IsNullOrWhiteSpace(command))
-    {
-        Console.Write("Enter command: ");
-        command = Console.ReadLine();
-    }
+    var command = GetAnswer<string>(prompt: "Enter command");
 
+    // Execute the command
     try
     {
         switch (command.Trim())
