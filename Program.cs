@@ -190,7 +190,7 @@ while (!exit)
             case "9":
                 {
                     //  Get highest earning employee
-                    var hee = db.Employees.Include(x => x.Department).OrderByDescending(x => x.Salary).Take(1).Single();
+                    var hee = db.Employees.Include(x => x.Department).OrderByDescending(x => x.Salary).First();
 
                     Console.WriteLine();
                     Console.WriteLine($"Highest earning employee: {hee.Name}, salary {hee.Salary:C2}, dept {hee.Department.Name}");
@@ -230,8 +230,7 @@ while (!exit)
                         .GroupBy(e => e.Department)
                         .Select(g => new { Department = g.Key.Name, NumberOfEmployees = g.Count() })
                         .OrderByDescending(o => o.NumberOfEmployees)
-                        .Take(1)
-                        .Single();
+                        .First();
 
                     Console.WriteLine();
                     Console.WriteLine($"Department with most employees is '{dept.Department}', with {dept.NumberOfEmployees} staff");
