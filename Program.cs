@@ -78,7 +78,7 @@ while (!exit)
                     //  Add one employee
                     var employee = new Employee();
                     employee.Name = GetAnswer<string>("Name of employee");
-                    employee.Salary = GetAnswer<float>("Salary");
+                    employee.Salary = GetAnswer<decimal>("Salary");
 
                     var deptName = GetAnswer<string>("Department");
                     employee.DepartmentId = db.Departments.Single(d => d.Name == deptName).Id;
